@@ -11,7 +11,7 @@ import { Calendar1Icon } from "lucide-react";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { DayPicker } from 'react-day-picker';
-import "react-day-picker/style.css";
+import "react-day-picker/dist/style.css";
 import useFetch from "@/hooks/use-fetch";
 import { useRouter } from "next/navigation";
 import { sprintSchema } from "@/lib/validators";
