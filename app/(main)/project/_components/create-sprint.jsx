@@ -25,7 +25,7 @@ const SprintCreationForm = ({
 }) => {
 
     const [showForm, setShowForm] = useState(false);
-    const [dataeRange, setDateRange] = useState({
+    const [dateRange, setDateRange] = useState({
         from: new Date(),
         to: addDays(new Date(), 14)
     });
@@ -36,8 +36,8 @@ const SprintCreationForm = ({
         resolver: zodResolver(sprintSchema),
         defaultValues: {
             name: `${projectKey}-${sprintKey}`,
-            startDate: dataeRange.from,
-            endDate: dataeRange.to,
+            startDate: dateRange.from,
+            endDate: dateRange.to,
         },
     });
 
@@ -46,8 +46,8 @@ const SprintCreationForm = ({
     const onSubmit = async(data)=>{
         await createSprintFn(projectId,{
             ...data,
-            startDate:dataeRange.from,
-            endDate:dataeRange.to
+            startDate:dateRange.from,
+            endDate:dateRange.to
         });
         setShowForm(false);
         toast.success("Sprint created successfully");
@@ -85,14 +85,14 @@ const SprintCreationForm = ({
                                         return (
                                             <Popover>
                                                 <PopoverTrigger asChild>
-                                                    <Button variant='outline' className={`w-full justify-start text-left font-normal bg-slate-950 ${!dataeRange && "text-muted-foreground"}`}>
+                                                    <Button variant='outline' className={`w-full justify-start text-left font-normal bg-slate-950 ${!dateRange && "text-muted-foreground"}`}>
                                                         <Calendar1Icon className="mr-2 h-4 w-4" />
-                                                        {dataeRange.from && dataeRange.to ? format(dataeRange.from, "LLL dd, y") + " - " + format(dataeRange.to, "LLL dd, y") : <span>Pick a date</span>}
+                                                        {dateRange.from && dateRange.to ? format(dateRange.from, "LLL dd, y") + " - " + format(dateRange.to, "LLL dd, y") : <span>Pick a date</span>}
                                                     </Button>
                                                 </PopoverTrigger>
                                                 <PopoverContent className="w-auto bg-slate-900" align="start">
                                                     <DayPicker mode="range"
-                                                        selected={dataeRange}
+                                                        selected={dateRange}
                                                         onSelect={(range) => {
                                                             if (range?.from && range?.to) {
                                                                 setDateRange(range);
